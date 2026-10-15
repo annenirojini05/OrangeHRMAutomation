@@ -37,7 +37,7 @@ public class EmployeeSearchTest
         );
     }
 
-    @Test(groups = {"regression"})
+    @Test
     public void searchInvalidEmployeeTest() {
 
         LoginPage loginPage =
@@ -54,6 +54,11 @@ public class EmployeeSearchTest
                 "admin123"
         );
 
+        Assert.assertTrue(
+                dashboardPage.isDashboardDisplayed(),
+                "Login did not reach the OrangeHRM dashboard"
+        );
+
         dashboardPage.openPIM();
 
         employeeSearchPage
@@ -66,7 +71,7 @@ public class EmployeeSearchTest
         Assert.assertTrue(
                 employeeSearchPage
                         .isNoRecordsDisplayed(),
-                "Expected no records to be found"
+                "Expected no employee records"
         );
     }
 }

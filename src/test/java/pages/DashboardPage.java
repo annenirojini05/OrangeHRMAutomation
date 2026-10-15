@@ -14,7 +14,7 @@ public class DashboardPage {
     private WebDriverWait wait;
 
     private By dashboardHeading =
-            By.xpath("//h6[text()='Dashboard']");
+            By.xpath("//h6[normalize-space()='Dashboard']");
 
     private By pimMenu =
             By.xpath("//span[normalize-space()='PIM']");
@@ -32,36 +32,43 @@ public class DashboardPage {
 
     public boolean isDashboardDisplayed() {
 
-        return wait.until(
-                ExpectedConditions
-                        .visibilityOfElementLocated(
-                                dashboardHeading
-                        )
-        ).isDisplayed();
+        try {
+
+            wait.until(
+                    ExpectedConditions.urlContains(
+                            "/dashboard"
+                    )
+            );
+
+            return wait.until(
+                    ExpectedConditions
+                            .visibilityOfElementLocated(
+                                    dashboardHeading
+                            )
+            ).isDisplayed();
+
+        } catch (Exception e) {
+
+            return false;
+        }
     }
 
     public void openPIM() {
 
         wait.until(
-                ExpectedConditions
-                        .visibilityOfElementLocated(
-                                dashboardHeading
-                        )
+                ExpectedConditions.urlContains(
+                        "/dashboard"
+                )
         );
 
         WebElement pim =
                 wait.until(
                         ExpectedConditions
-                                .visibilityOfElementLocated(
+                                .elementToBeClickable(
                                         pimMenu
                                 )
                 );
 
-        wait.until(
-                ExpectedConditions
-                        .elementToBeClickable(
-                                pim
-                        )
-        ).click();
+        pim.click();
     }
 }
