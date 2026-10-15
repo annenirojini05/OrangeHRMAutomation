@@ -1,12 +1,13 @@
 package utilities;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -42,13 +43,17 @@ public class ScreenshotUtils {
 
         try {
 
-            destination
-                    .getParentFile()
-                    .mkdirs();
+            File parent =
+                    destination.getParentFile();
 
-            FileUtils.copyFile(
-                    source,
-                    destination
+            if (parent != null) {
+                parent.mkdirs();
+            }
+
+            Files.copy(
+                    source.toPath(),
+                    destination.toPath(),
+                    StandardCopyOption.REPLACE_EXISTING
             );
 
         } catch (IOException e) {
