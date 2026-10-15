@@ -82,6 +82,9 @@ public class BaseTest {
                         + baseUrl
         );
     }
+    public WebDriver getDriver() {
+        return driver;
+    }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {

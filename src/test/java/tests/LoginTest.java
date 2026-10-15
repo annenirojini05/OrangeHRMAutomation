@@ -1,11 +1,14 @@
 package tests;
 
+import listeners.TestListener;
 import org.openqa.selenium.Dimension;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LoginPage;
 
+@Listeners(TestListener.class)
 public class LoginTest extends BaseTest {
 
     @Test(groups = {"smoke", "regression"})

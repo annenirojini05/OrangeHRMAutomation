@@ -1,11 +1,14 @@
 package tests;
 
+import listeners.TestListener;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.EmployeeSearchPage;
 import pages.LoginPage;
 
+@Listeners(TestListener.class)
 public class EmployeeSearchTest
         extends BaseTest {
 
